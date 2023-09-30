@@ -1,4 +1,4 @@
-**APPLYZER** 
+**APPLYZER** -  ** APK ANALYSIS TOOL**
 
 
 APPLYZER is an open-source malware analysis tool & for detection malicious android packages (APK) written in Python <#have to add more lines>
