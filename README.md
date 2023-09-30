@@ -1,7 +1,7 @@
 **APPLYZER** -  **APK ANALYSIS TOOL**
 
 
-prerequisite
+**Prerequisite**
 
 1.LINUX OS 
 
