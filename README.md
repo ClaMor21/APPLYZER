@@ -3,7 +3,7 @@
 
 prerequisite
 
-1.LINUX OS
+1.LINUX OS \n
 2.Androguard
 3.Python
 
