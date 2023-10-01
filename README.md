@@ -17,7 +17,8 @@ APPLYZER is an open-source malware analysis tool for detection malicious android
     4.python Applyzer.py
 
 # **PREVIEW**
-![Screenshot_20231001_182258](https://github.com/ClaMor21/APPLYZER/assets/118982205/25dc3673-b01b-463e-b9ba-12d6ec5661ac)
+![Screenshot_20231001_215118](https://github.com/ClaMor21/APPLYZER/assets/118982205/f92e3880-c461-434b-aef1-f817717f6ed3)
+
 
 # **EXAMPLE**
 
