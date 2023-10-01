@@ -1,7 +1,7 @@
 
 **Prerequisite**
 
-1.LINUX OS 
+1.LINUX 
 
 2.Androguard
 
