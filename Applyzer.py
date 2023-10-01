@@ -12,6 +12,7 @@ class ApplyzerGUI:
         self.root = root
         self.root.title('Applyzer')
         self.root.geometry('1920x1080')
+        self.root.resizable(False,False)
 
         # Add the title label
         self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 50")
