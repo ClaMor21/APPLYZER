@@ -11,34 +11,35 @@ class ApplyzerGUI:
     def __init__(self, root):
         self.root = root
         self.root.title('Applyzer')
-        self.root.geometry('1920x1080')
+        self.root.geometry('800x600')
         self.root.resizable(False,False)
 
         # Add the title label
-        self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 50")
-        self.title.place(x=450, y=15)
+        self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 35")
+        self.title.place(x=50, y=15)
 
-        self.text_output = Text(self.root, wrap=tk.WORD, height=40, width=100)
+        self.text_output = Text(self.root, wrap=tk.WORD, height=40, width=60)
         self.text_output.place(x=180, y=90, width=1600, height=700)  # Adjust size and placement
         self.text_output.pack(pady=100)
 
         self.scrollbar = Scrollbar(self.root)
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.scrollbar.place(x=700 , y=530)
 
         self.text_output.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.text_output.yview)
 
         self.analyze_button = Button(self.root, text='Analyze APK', command=self.analyze_apk)
-        self.analyze_button.place(x=800, y=820)
+        self.analyze_button.place(x=245, y=530)
 
         self.browse_button = Button(self.root, text='Browse APK', command=self.open_file_dialog)
-        self.browse_button.place(x=600, y=820)
+        self.browse_button.place(x=105, y=530)
 
         self.clear_button = Button(self.root, text='Clear', command=self.clear_output)
-        self.clear_button.place(x=1290, y=820)
+        self.clear_button.place(x=600, y=530)
 
         self.pre_static_analysis_button = Button(self.root, text='Pre-Static Analysis', command=self.pre_static_analysis)
-        self.pre_static_analysis_button.place(x=1020, y=820)
+        self.pre_static_analysis_button.place(x=400, y=530)
 
         self.apk_file = None
 
