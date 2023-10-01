@@ -1,8 +1,5 @@
 # requirements.txt
 
-# System utilities
-sys>=3.0.0
-
 # HTTP requests library
 requests>=2.0.0
 
