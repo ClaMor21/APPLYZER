@@ -1,4 +1,3 @@
-#CREATED BY CYSEC
 import sys
 import requests
 import json
@@ -7,39 +6,58 @@ from tkinter import filedialog, messagebox, Scrollbar, Text, Button, Label, VERT
 
 from androguard.core.bytecodes.apk import APK
 
+# Set your VirusTotal API key here
+VIRUSTOTAL_API_KEY = 'cabc5965983f934e1aff7a8a97bb5cf541575292adbaed7a6d5268d9d86bdad5'
+
 class ApplyzerGUI:
     def __init__(self, root):
         self.root = root
         self.root.title('Applyzer')
         self.root.geometry('800x600')
-        self.root.resizable(False,False)
+        self.root.resizable(False, False)
 
-        # Add the title label
-        self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 35")
+        # Dark theme colors
+        bg_color = "#1E1E1E"  # Background color
+        fg_color = "#FFFFFF"  # Text color
+        button_bg = "#333333"  # Button background color
+        button_fg = "#FFFFFF"  # Button text color
+
+        # Configure the root window background
+        self.root.configure(bg=bg_color)
+
+        # Add the title label with dark theme
+        self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 35", bg=bg_color, fg=fg_color)
         self.title.place(x=50, y=15)
 
-        self.text_output = Text(self.root, wrap=tk.WORD, height=40, width=60)
-        self.text_output.place(x=180, y=90, width=1600, height=700)  # Adjust size and placement
+        # Text output with dark theme
+        self.text_output = Text(self.root, wrap=tk.WORD, height=40, width=60, bg=bg_color, fg=fg_color)
+        self.text_output.place(x=180, y=90, width=1600, height=700)
         self.text_output.pack(pady=100)
 
+        # Scrollbar with dark theme
         self.scrollbar = Scrollbar(self.root)
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        self.scrollbar.place(x=700 , y=530)
+        self.scrollbar.place(x=700, y=530)
 
+        # Configure text output and scrollbar
         self.text_output.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.text_output.yview)
 
-        self.analyze_button = Button(self.root, text='Analyze APK', command=self.analyze_apk)
+        # Dark theme buttons
+        self.analyze_button = Button(self.root, text='Analyze APK', command=self.analyze_apk, bg=button_bg, fg=button_fg)
         self.analyze_button.place(x=245, y=530)
 
-        self.browse_button = Button(self.root, text='Browse APK', command=self.open_file_dialog)
+        self.browse_button = Button(self.root, text='Browse APK', command=self.open_file_dialog, bg=button_bg, fg=button_fg)
         self.browse_button.place(x=105, y=530)
 
-        self.clear_button = Button(self.root, text='Clear', command=self.clear_output)
+        self.clear_button = Button(self.root, text='Clear', command=self.clear_output, bg=button_bg, fg=button_fg)
         self.clear_button.place(x=600, y=530)
 
-        self.pre_static_analysis_button = Button(self.root, text='Pre-Static Analysis', command=self.pre_static_analysis)
+        self.pre_static_analysis_button = Button(self.root, text='Pre-Static Analysis', command=self.pre_static_analysis, bg=button_bg, fg=button_fg)
         self.pre_static_analysis_button.place(x=400, y=530)
+
+        self.save_report_button = Button(self.root, text='Save Report', command=self.save_report, bg=button_bg, fg=button_fg)
+        self.save_report_button.place(x=695, y=565)
 
         self.apk_file = None
 
@@ -115,7 +133,7 @@ class ApplyzerGUI:
 
         # For example, you might use requests to send the file to VirusTotal API:
         url = 'https://www.virustotal.com/vtapi/v2/file/scan'
-        params = {'apikey': 'cabc5965983f934e1aff7a8a97bb5cf541575292adbaed7a6d5268d9d86bdad5'}  # Use your key here
+        params = {'apikey': VIRUSTOTAL_API_KEY}
         files = {'file': file}
         response = requests.post(url, files=files, params=params)
         return response.text
@@ -130,20 +148,32 @@ class ApplyzerGUI:
 
             # Fetch security vendors' analysis using the resource ID
             url = 'https://www.virustotal.com/vtapi/v2/file/report'
-            params = {'apikey': 'cabc5965983f934e1aff7a8a97bb5cf541575292adbaed7a6d5268d9d86bdad5'}  # Use your key here
-            params['resource'] = resource_id  # Add resource ID to parameters
+            params = {'apikey': VIRUSTOTAL_API_KEY}
+            params['resource'] = resource_id
             response = requests.get(url, params=params)
             response_data = json.loads(response.text)
 
             # Extract and format security vendors' analysis for flagged vendors
             analysis_text = "Flagged Security Vendors' Analysis:\n"
             for vendor, result in response_data['scans'].items():
-                if result['result']:  # Check if the result field is not empty (vendor flagged it)
+                if result['result']:
                     analysis_text += f"{vendor}: {result['result']}\n"
 
             return analysis_text
         except json.JSONDecodeError:
             return "Error: Unable to decode JSON response from VirusTotal API"
+
+    def save_report(self):
+        if self.text_output.get(1.0, END) == "\n":
+            messagebox.showwarning("No Report", "There is no report to save.")
+            return
+
+        file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
+        if file_path:
+            with open(file_path, 'w') as report_file:
+                report_text = self.text_output.get(1.0, END)
+                report_file.write(report_text)
+            messagebox.showinfo("Report Saved", "The report has been saved successfully.")
 
 def main():
     root = tk.Tk()
