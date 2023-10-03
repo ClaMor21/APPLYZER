@@ -26,8 +26,8 @@ class ApplyzerGUI:
         self.root.configure(bg=bg_color)
 
         # Add the title label with dark theme
-        self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 35", bg=bg_color, fg=fg_color)
-        self.title.place(x=50, y=15)
+        self.title = Label(self.root, text="APPLYZER - APK ANALYSIS TOOL", font="Bold 33", bg=bg_color, fg=fg_color)
+        self.title.place(x=48, y=15)
 
         # Text output with dark theme
         self.text_output = Text(self.root, wrap=tk.WORD, height=40, width=60, bg=bg_color, fg=fg_color)
@@ -37,7 +37,7 @@ class ApplyzerGUI:
         # Scrollbar with dark theme
         self.scrollbar = Scrollbar(self.root)
         self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        self.scrollbar.place(x=700, y=530)
+        self.scrollbar.place(x=700, y=250)
 
         # Configure text output and scrollbar
         self.text_output.config(yscrollcommand=self.scrollbar.set)
@@ -57,7 +57,7 @@ class ApplyzerGUI:
         self.pre_static_analysis_button.place(x=400, y=530)
 
         self.save_report_button = Button(self.root, text='Save Report', command=self.save_report, bg=button_bg, fg=button_fg)
-        self.save_report_button.place(x=695, y=565)
+        self.save_report_button.place(x=700, y=565)
 
         self.apk_file = None
 
