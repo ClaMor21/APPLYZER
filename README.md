@@ -1,6 +1,6 @@
 # **APPLYZER** - **APK ANALYSIS TOOL**
 
-APPLYZER is an open-source malware analysis tool for detection of malicious android packages (APK) using static and pre-static analysis techniques.
+APPLYZER is an open-source malware analysis tool for detection of malicious android packages (APK) using pre-static and static analysis techniques.
 
 # **Prerequisite**
 
