@@ -10,7 +10,7 @@ from androguard.core.bytecodes.apk import APK
 # Set your VirusTotal API key here
 VIRUSTOTAL_API_KEY = 'cabc5965983f934e1aff7a8a97bb5cf541575292adbaed7a6d5268d9d86bdad5'
 
-class ApplyzerGUI:
+class Applyzer:
     def __init__(self, root):
         self.root = root
         self.root.title('Applyzer')
